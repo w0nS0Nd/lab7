@@ -4,25 +4,16 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js', // Точка входу
+    entry: './src/index.js',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'), // Вихідна папка
-        clean: true, // Очищення dist перед кожним запуском
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(jpg|jpeg|png|gif|svg|webp)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'assets/images/[name].[hash][ext][query]',
-                },
-            },
-        ],
+        path: path.resolve(__dirname, 'dist'),
+        clean: true
     },
     plugins: [
         new CleanWebpackPlugin(),
+
+        // HTML-файли
         new HtmlWebpackPlugin({
             template: './src/pages/index.html',
             filename: 'index.html',
@@ -39,13 +30,17 @@ module.exports = {
             template: './src/pages/photo.html',
             filename: 'photo.html',
         }),
+
+        // Копіювання зображень
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'src/assets/images', to: 'assets/images' },
-            ],
-        }),
+                {
+                    from: path.resolve(__dirname, 'src/assets/images'),
+                    to: 'assets/images'
+                }
+            ]
+        })
     ],
-    mode: 'development',
     devServer: {
         open: true,
         port: 8080,
@@ -53,4 +48,5 @@ module.exports = {
             directory: path.join(__dirname, 'dist'),
         },
     },
+    mode: 'development'
 };
