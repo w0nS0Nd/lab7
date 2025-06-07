@@ -1,1 +1,49 @@
+/* Стилі для друку */
+body {
+    font-family: "Times New Roman", Georgia, Palatino, serif;
+    color: #000;
+    background: none;
+    margin: 50px; /* Поля для друку */
+}
 
+/* Приховуємо шапку, підвал, меню та бічну панель */
+header, footer, .menu, .sidebar {
+    display: none;
+}
+
+/* Центруємо заголовки */
+h1, h2, h3 {
+    text-align: center;
+}
+
+/* Виведення повного URL після посилань */
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:after {
+    content: " (" attr(href) ")"; /* Додаємо URL після посилання */
+}
+
+/* Приховуємо зображення */
+img {
+    display: none;
+}
+
+/* Адаптивність для меншого екрану: контент займає 90% ширини */
+@media screen and (max-width: 800px) {
+    main {
+        width: 90%;
+        margin: 0 auto;  /* Центруємо контент */
+    }
+
+    nav ul {
+        display: block; /* Вертикальне меню */
+    }
+
+    nav ul li {
+        width: 100%;  /* Ширина елементів меню на всю ширину */
+        text-align: center;  /* Центрування елементів меню */
+    }
+}
